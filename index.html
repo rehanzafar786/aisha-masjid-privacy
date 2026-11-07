@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy | Aisha Masjid App</title>
+<meta name="description" content="Privacy Policy for the Aisha Masjid mobile app: what personal information the app holds, why, who can see it, how long it is kept and how to have your account deleted.">
+<meta name="robots" content="index, follow">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#1E6B6B">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Privacy Policy | Aisha Masjid App">
+<meta property="og:description" content="How the Aisha Masjid app collects, uses and protects your information.">
+<meta property="og:image" content="assets/logo.png">
+<link rel="icon" type="image/png" href="assets/logo.png">
+<link rel="apple-touch-icon" href="assets/logo.png">
+<style>
+:root{
+  --brand:#1E6B6B; --brand-ink:#14514B; --brand-soft:#E4F0F0; --gold:#B8955A; --gold-soft:#F6EFE2;
+  --bg:#F6F7F5; --surface:#FFFFFF; --text:#1B2727; --sub:#4A5A5A; --line:#DCE4E2;
+  --hero-1:#14514B; --hero-2:#1E6B6B; --hero-3:#2A7F76;
+  --shadow:0 1px 2px rgba(20,40,40,.05),0 6px 24px rgba(20,60,60,.07);
+  --radius:16px;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --brand:#5FB8AC; --brand-ink:#8ED3C9; --brand-soft:#173130; --gold:#D9B983; --gold-soft:#2A251C;
+    --bg:#0F1717; --surface:#162222; --text:#E6EEEC; --sub:#A9BAB7; --line:#263736;
+    --hero-1:#0E3A36; --hero-2:#14514B; --hero-3:#1B6158;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 24px rgba(0,0,0,.25);
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--text);
+  font:17px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:var(--brand);text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{color:var(--brand-ink)}
+a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:6px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--surface);color:var(--text);padding:8px 14px;border-radius:8px;z-index:10}
+.skip:focus{left:16px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+
+/* Header */
+.topbar{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--surface) 88%,transparent);
+  backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);font-weight:700;letter-spacing:-.01em}
+.brand img{width:34px;height:34px}
+.brand small{display:block;font-weight:500;font-size:12px;color:var(--sub);line-height:1.2;letter-spacing:0}
+.brand span{line-height:1.2}
+.topbar a.contact{font-size:14px;font-weight:600;text-decoration:none;padding:7px 14px;border-radius:999px;border:1px solid var(--line);color:var(--brand-ink);white-space:nowrap}
+.topbar a.contact:hover{background:var(--brand-soft)}
+
+.hero{background:linear-gradient(135deg,var(--hero-1),var(--hero-2) 55%,var(--hero-3));color:#fff;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:auto -80px -120px auto;width:360px;height:360px;border-radius:50%;
+  background:radial-gradient(circle,rgba(217,185,131,.28),transparent 70%)}
+.hero .wrap{padding-top:56px;padding-bottom:64px;position:relative;z-index:1}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#F3E6CC}
+.eyebrow::before{content:"";width:18px;height:2px;background:#D9B983;border-radius:2px}
+.hero h1{font-size:clamp(34px,6vw,52px);line-height:1.1;letter-spacing:-.025em;margin:14px 0 14px;font-weight:800}
+.hero p.lede{max-width:640px;margin:0;font-size:18px;color:rgba(255,255,255,.88)}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;padding:0;list-style:none}
+.meta li{font-size:14px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);padding:6px 12px;border-radius:999px}
+.meta strong{font-weight:700}
+
+/* Layout */
+.layout{display:grid;grid-template-columns:1fr;gap:32px;padding-top:32px;padding-bottom:64px}
+@media (min-width:960px){.layout{grid-template-columns:260px minmax(0,1fr);gap:48px;padding-top:48px}}
+.toc-side{display:none}
+@media (min-width:960px){
+  .toc-side{display:block;position:sticky;top:84px;align-self:start;max-height:calc(100vh - 100px);overflow:auto}
+  .toc-mobile{display:none}
+}
+.toc-title{font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--sub);margin:0 0 10px}
+.toc ol{list-style:none;margin:0;padding:0;counter-reset:toc}
+.toc li{counter-increment:toc}
+.toc a{display:flex;gap:10px;padding:7px 10px;border-radius:10px;text-decoration:none;color:var(--sub);font-size:14.5px;line-height:1.45}
+.toc a::before{content:counter(toc,decimal-leading-zero);font-variant-numeric:tabular-nums;color:var(--gold);font-weight:700;font-size:12.5px;padding-top:2px}
+.toc a:hover{background:var(--brand-soft);color:var(--brand-ink)}
+.toc-mobile{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.toc-mobile summary{cursor:pointer;list-style:none;padding:16px 18px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+.toc-mobile summary::-webkit-details-marker{display:none}
+.toc-mobile summary::after{content:"";width:9px;height:9px;border-right:2px solid var(--sub);border-bottom:2px solid var(--sub);transform:rotate(45deg);margin-top:-4px;transition:transform .2s}
+.toc-mobile[open] summary::after{transform:rotate(-135deg);margin-top:4px}
+.toc-mobile ol{padding:0 8px 12px}
+
+/* Content */
+main{min-width:0}
+.glance{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;margin-bottom:28px}
+.glance h2{font-size:18px;margin:0 0 14px;letter-spacing:-.01em}
+.glance ul{list-style:none;margin:0;padding:0;display:grid;gap:12px;grid-template-columns:1fr}
+@media (min-width:640px){.glance ul{grid-template-columns:1fr 1fr}}
+.glance li{display:flex;gap:12px;font-size:15.5px;line-height:1.5;color:var(--sub)}
+.glance li::before{content:"";flex:none;width:22px;height:22px;border-radius:50%;margin-top:1px;
+  background:var(--brand-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232A7F76' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/13px no-repeat}
+.glance strong{color:var(--text)}
+
+section.policy{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px 24px;margin-bottom:18px;scroll-margin-top:80px}
+@media (min-width:640px){section.policy{padding:34px 38px}}
+section.policy h2{display:flex;align-items:baseline;gap:12px;font-size:23px;line-height:1.3;letter-spacing:-.015em;margin:0 0 12px}
+section.policy h2 .n{font-size:14px;font-weight:700;color:var(--gold);font-variant-numeric:tabular-nums;min-width:22px}
+section.policy h3{font-size:17px;margin:24px 0 6px;letter-spacing:-.005em;scroll-margin-top:80px}
+section.policy p{margin:0 0 14px;color:var(--sub)}
+section.policy p:last-child,section.policy ul:last-child{margin-bottom:0}
+section.policy ul{margin:0 0 14px;padding-left:22px;color:var(--sub)}
+section.policy li{margin:4px 0}
+section.policy li::marker{color:var(--brand)}
+section.policy strong{color:var(--text)}
+.note{border-left:3px solid var(--gold);background:var(--gold-soft);padding:12px 16px;border-radius:0 10px 10px 0;color:var(--text);font-size:15.5px;margin:0 0 14px}
+.grid2{display:grid;gap:14px;grid-template-columns:1fr;margin:6px 0 14px}
+@media (min-width:640px){.grid2{grid-template-columns:1fr 1fr}}
+.tile{border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.tile h3{margin:0 0 6px !important;font-size:15.5px}
+.tile ul{margin:0;padding-left:18px;font-size:15.5px}
+.tile p{font-size:15.5px}
+.steps{counter-reset:s;list-style:none;padding:0 !important}
+.steps li{counter-increment:s;position:relative;padding-left:38px;margin:10px 0}
+.steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:26px;height:26px;border-radius:50%;background:var(--brand);color:#fff;font-size:13px;font-weight:700;display:grid;place-items:center}
+.email{display:inline-flex;align-items:center;gap:10px;margin-top:4px;padding:12px 18px;border-radius:12px;background:var(--brand-soft);font-weight:700;text-decoration:none;color:var(--brand-ink);word-break:break-all}
+.email svg{flex:none}
+.backtop{display:inline-block;margin-top:8px;font-size:14px;font-weight:600;text-decoration:none}
+
+footer{border-top:1px solid var(--line);background:var(--surface)}
+footer .wrap{padding-top:28px;padding-bottom:36px;display:flex;flex-wrap:wrap;gap:16px 32px;justify-content:space-between;align-items:center;font-size:14px;color:var(--sub)}
+footer .brand{font-size:15px}
+footer nav{display:flex;flex-wrap:wrap;gap:6px 20px}
+footer nav a{text-decoration:none;color:var(--sub)}
+footer nav a:hover{color:var(--brand-ink)}
+
+@media (max-width:420px){
+  body{font-size:16px}
+  .topbar a.contact{padding:6px 11px;font-size:13px}
+  .brand small{display:none}
+  .hero .wrap{padding-top:40px;padding-bottom:48px}
+  .hero p.lede{font-size:16.5px}
+  section.policy h2{font-size:20.5px}
+}
+@media print{
+  .topbar,.toc-side,.toc-mobile,.backtop,.skip{display:none !important}
+  .hero{background:none;color:#000}.hero p.lede,.eyebrow{color:#333}.meta li{border-color:#999;background:none}
+  section.policy,.glance{box-shadow:none;break-inside:avoid-page}
+  body{background:#fff}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#content">Skip to policy</a>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Aisha Masjid — top of page">
+      <img src="assets/logo.png" width="34" height="34" alt="">
+      <span>Aisha Masjid<small>Donation app</small></span>
+    </a>
+    <a class="contact" href="#contact">Contact</a>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div class="wrap">
+    <span class="eyebrow">Aisha Masjid app</span>
+    <h1>Privacy Policy</h1>
+    <p class="lede">What personal information the Aisha Masjid app holds, why it is held, who can see it, and the choices available to you.</p>
+    <ul class="meta">
+      <li>Last updated: <strong><time datetime="2026-10-01">1 October 2026</time></strong></li>
+      <li>Applies to: <strong>iOS &amp; Android</strong></li>
+    </ul>
+  </div>
+</div>
+
+<div class="wrap layout">
+  <aside class="toc toc-side" aria-labelledby="toc-side-title">
+    <p class="toc-title" id="toc-side-title">On this page</p>
+    <nav aria-labelledby="toc-side-title">
+      <ol>
+        <li><a href="#introduction">Introduction</a></li>
+        <li><a href="#information-we-collect">Information We Collect</a></li>
+        <li><a href="#how-we-use">How We Use Your Information</a></li>
+        <li><a href="#information-sharing">Information Sharing</a></li>
+        <li><a href="#third-party-services">Third-Party Services</a></li>
+        <li><a href="#storage-security">Data Storage and Security</a></li>
+        <li><a href="#data-retention">Data Retention</a></li>
+        <li><a href="#account-deletion">Account and Data Deletion</a></li>
+        <li><a href="#children">Children's Privacy</a></li>
+        <li><a href="#your-rights">Your Rights</a></li>
+        <li><a href="#policy-updates">Policy Updates</a></li>
+        <li><a href="#contact">Contact Information</a></li>
+      </ol>
+    </nav>
+  </aside>
+
+  <main id="content">
+    <details class="toc toc-mobile">
+      <summary>Contents</summary>
+      <nav aria-label="Contents">
+        <ol>
+          <li><a href="#introduction">Introduction</a></li>
+          <li><a href="#information-we-collect">Information We Collect</a></li>
+          <li><a href="#how-we-use">How We Use Your Information</a></li>
+          <li><a href="#information-sharing">Information Sharing</a></li>
+          <li><a href="#third-party-services">Third-Party Services</a></li>
+          <li><a href="#storage-security">Data Storage and Security</a></li>
+          <li><a href="#data-retention">Data Retention</a></li>
+          <li><a href="#account-deletion">Account and Data Deletion</a></li>
+          <li><a href="#children">Children's Privacy</a></li>
+          <li><a href="#your-rights">Your Rights</a></li>
+          <li><a href="#policy-updates">Policy Updates</a></li>
+          <li><a href="#contact">Contact Information</a></li>
+        </ol>
+      </nav>
+    </details>
+
+    <div class="glance" style="margin-top:20px">
+      <h2>At a glance</h2>
+      <ul>
+        <li><span><strong>Accounts are created by the mosque office</strong>, not by self sign-up.</span></li>
+        <li><span><strong>Never sold, rented or shared for marketing.</strong></span></li>
+        <li><span><strong>No location tracking</strong>, no advertising and no third-party analytics.</span></li>
+        <li><span><strong>Delete your account</strong> from Profile → Delete Account, or by email.</span></li>
+      </ul>
+    </div>
+
+    <section class="policy" id="introduction" aria-labelledby="h-introduction">
+      <h2 id="h-introduction"><span class="n">01</span>Introduction</h2>
+      <p>Aisha Masjid uses this app to record the donations entrusted to the mosque and to show donors how those funds are used. This policy explains what personal information the app holds, why it is held, and the choices available to you.</p>
+      <p>It applies to everyone who signs in to the Aisha Masjid app, whether as a donor, an accountant or an administrator.</p>
+    </section>
+
+    <section class="policy" id="information-we-collect" aria-labelledby="h-collect">
+      <h2 id="h-collect"><span class="n">02</span>Information We Collect</h2>
+
+      <h3 id="account-information">Account and personal information</h3>
+      <p>Accounts are created by the mosque office, not by self sign-up. The record created for you may include:</p>
+      <ul>
+        <li>Your name, email address and phone number</li>
+        <li>Your CNIC, gender and postal address</li>
+        <li>Your monthly commitment and the accountant assigned to you</li>
+      </ul>
+      <p>You sign in with your email address and a password that you alone know.</p>
+
+      <h3 id="donation-records">Donation records</h3>
+      <p>The app stores the donations recorded against your name: the amount, date, method, receipt number and the project a contribution was tagged to.</p>
+
+      <h3 id="photos">Photos you choose to attach</h3>
+      <p>The app stores any profile photo or receipt image you choose to attach. Photos are only taken from your device when you choose to attach one.</p>
+
+      <h3 id="device-information">Device and technical information</h3>
+      <p>When you sign in, the app stores a notification token for your device so announcements and receipts can reach you, together with basic technical details such as the app version and your chosen language and accessibility settings.</p>
+
+      <h3 id="location-information">Location information</h3>
+      <p>The app does <strong>not</strong> track your location. It contains no advertising and no third-party analytics.</p>
+    </section>
+
+    <section class="policy" id="how-we-use" aria-labelledby="h-use">
+      <h2 id="h-use"><span class="n">03</span>How We Use Your Information</h2>
+      <p>Your information is used only to run the mosque's donation records:</p>
+      <ul>
+        <li>To identify you when you sign in</li>
+        <li>To record and acknowledge your contributions</li>
+        <li>To issue receipts</li>
+        <li>To let your assigned accountant collect your monthly commitment</li>
+        <li>To send announcements and reminders about mosque events and projects</li>
+        <li>To prepare the accounts the mosque is obliged to keep</li>
+      </ul>
+    </section>
+
+    <section class="policy" id="information-sharing" aria-labelledby="h-sharing">
+      <h2 id="h-sharing"><span class="n">04</span>Information Sharing</h2>
+      <p>Your personal details are visible to <strong>you</strong>, to <strong>the accountant assigned to you</strong> and to <strong>the mosque administrator</strong>. Other donors never see your details.</p>
+      <p>Published fund-utilisation figures are aggregated totals and never name an individual donor.</p>
+      <p class="note">Your information is never sold, rented or shared for marketing.</p>
+    </section>
+
+    <section class="policy" id="third-party-services" aria-labelledby="h-third">
+      <h2 id="h-third"><span class="n">05</span>Third-Party Services</h2>
+      <p>The app stores data with the following service providers:</p>
+      <div class="grid2">
+        <div class="tile">
+          <h3>Google Firebase</h3>
+          <p>Authentication, database and notifications.<br><a href="https://firebase.google.com/support/privacy" rel="noopener">Firebase privacy information</a></p>
+        </div>
+        <div class="tile">
+          <h3>Cloudflare</h3>
+          <p>File and image storage.<br><a href="https://www.cloudflare.com/privacypolicy/" rel="noopener">Cloudflare privacy policy</a></p>
+        </div>
+      </div>
+      <p>These providers process the data on the mosque's behalf under their own security obligations and may store it on servers outside your country. No other third party receives your data, except where the mosque is required to disclose it by law.</p>
+    </section>
+
+    <section class="policy" id="storage-security" aria-labelledby="h-security">
+      <h2 id="h-security"><span class="n">06</span>Data Storage and Security</h2>
+      <ul>
+        <li>Access is protected by an email and password you alone know.</li>
+        <li>Data is encrypted in transit.</li>
+        <li>Access rules limit each account to the records its role is permitted to see.</li>
+      </ul>
+      <p>Please keep your password private and tell the mosque office at once if you think someone else has used your account.</p>
+    </section>
+
+    <section class="policy" id="data-retention" aria-labelledby="h-retention">
+      <h2 id="h-retention"><span class="n">07</span>Data Retention</h2>
+      <p><strong>Profile details</strong> are kept for as long as your account is open.</p>
+      <p><strong>Donation and receipt records</strong> are kept for at least seven years after they are recorded, because the mosque must be able to account for every amount it has received. These records are retained in an anonymised form even after an account is closed.</p>
+    </section>
+
+    <section class="policy" id="account-deletion" aria-labelledby="h-deletion">
+      <h2 id="h-deletion"><span class="n">08</span>Account and Data Deletion</h2>
+      <h3>How to request deletion</h3>
+      <ol class="steps">
+        <li><strong>In the app:</strong> open <strong>Profile → Delete Account → Request Account Deletion</strong>. You are asked to type the email address you are signed in with to confirm, and the request is sent to the mosque office.</li>
+        <li><strong>By email:</strong> write to <a href="mailto:superadmin.ot@gmail.com">superadmin.ot@gmail.com</a> from the email address on your account.</li>
+      </ol>
+      <div class="grid2">
+        <div class="tile">
+          <h3>What will be removed</h3>
+          <ul>
+            <li>Your sign-in and password</li>
+            <li>Your name, email, phone, CNIC and address</li>
+            <li>Your profile photo and notification settings</li>
+          </ul>
+        </div>
+        <div class="tile">
+          <h3>What will be kept</h3>
+          <p>Receipts and accounting entries for donations already recorded are kept, without your personal details attached, for at least seven years from the date each amount was recorded. These anonymised records cannot be traced back to you.</p>
+        </div>
+      </div>
+      <h3>How long it takes</h3>
+      <p>Your request is recorded and sent to the mosque office for verification. Your account and personal data are permanently deleted within <strong>5 working days</strong>, and you receive a confirmation at your registered email address once this is complete. You are signed out as soon as the request is made. If you change your mind, contact the mosque office before the deletion is carried out.</p>
+      <h3>Before you continue</h3>
+      <p>Any monthly commitment recorded in your name will be cancelled, and you will stop receiving announcements and receipts. If you wish to give again afterwards, the mosque office will need to register you as a new donor.</p>
+    </section>
+
+    <section class="policy" id="children" aria-labelledby="h-children">
+      <h2 id="h-children"><span class="n">09</span>Children's Privacy</h2>
+      <p>The app is intended for adults who contribute to the mosque. Accounts are not knowingly created for children under 13, and any such account found will be removed.</p>
+    </section>
+
+    <section class="policy" id="your-rights" aria-labelledby="h-rights">
+      <h2 id="h-rights"><span class="n">10</span>Your Rights</h2>
+      <p>You may ask:</p>
+      <ul>
+        <li>To see the information held about you</li>
+        <li>To have an inaccurate detail corrected</li>
+        <li>To have your account closed and your personal data deleted</li>
+      </ul>
+      <p>The Delete Account screen in the app starts a deletion request (see <a href="#account-deletion">Account and Data Deletion</a>), or you may contact the mosque office directly.</p>
+    </section>
+
+    <section class="policy" id="policy-updates" aria-labelledby="h-updates">
+      <h2 id="h-updates"><span class="n">11</span>Policy Updates</h2>
+      <p>If this policy changes, the revised version will appear on this page and on the Privacy Policy screen in the app, with a new “Last updated” date. Continuing to use the app after a change means you accept the revised policy.</p>
+    </section>
+
+    <section class="policy" id="contact" aria-labelledby="h-contact">
+      <h2 id="h-contact"><span class="n">12</span>Contact Information</h2>
+      <p>For any question about this policy, or to exercise any of the rights above, write to the Aisha Masjid office at:</p>
+      <a class="email" href="mailto:superadmin.ot@gmail.com">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+        superadmin.ot@gmail.com
+      </a>
+      <p style="margin-top:18px"><a class="backtop" href="#top">↑ Back to top</a></p>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <img src="assets/logo.png" width="28" height="28" alt="">
+      <span>Aisha Masjid</span>
+    </a>
+    <nav aria-label="Footer">
+      <a href="#information-we-collect">Data we collect</a>
+      <a href="#account-deletion">Delete your account</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <span>© 2026 Aisha Masjid. Last updated 1 October 2026.</span>
+  </div>
+</footer>
+</body>
+</html>
