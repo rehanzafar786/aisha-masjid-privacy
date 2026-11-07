@@ -91,14 +91,17 @@ a:focus-visible,summary:focus-visible,.btn:focus-visible{outline:3px solid var(-
 .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-2)}
 .eyebrow::before{content:"";width:28px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
 .hero h1{font:600 clamp(44px,8vw,78px)/1.02 var(--serif);letter-spacing:-.02em;margin:18px 0 10px}
-.hero h1 .shine{background:linear-gradient(100deg,var(--gold) 0%,#F6E7C4 25%,var(--gold) 50%,#F6E7C4 75%,var(--gold) 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s linear infinite}
+.hero h1{animation:none}
+.word{display:inline-block;white-space:nowrap}
+.ch{display:inline-block;animation:letter 1s var(--ease) both;animation-delay:calc(.25s + var(--d)*.045s)}
+.gold .ch{color:#E2C383;animation:letter 1s var(--ease) both,goldglow 4.5s ease-in-out infinite;animation-delay:calc(.25s + var(--d)*.045s),calc(1.5s + var(--d)*.12s)}
 .tagline{font:italic 400 clamp(19px,2.6vw,24px)/1.4 var(--serif);color:rgba(255,255,255,.92);margin:0 0 12px}
 .lede{max-width:560px;margin:0;color:rgba(255,255,255,.74);font-size:16.5px}
 .chips{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0 0;padding:0;list-style:none}
 .chips li{display:flex;align-items:center;gap:8px;font-size:13.5px;padding:7px 14px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(230,207,158,.22);color:rgba(255,255,255,.9)}
 .chips .ic{width:16px;height:16px;color:var(--gold-2)}
 .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
-.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:14px;font-weight:700;font-size:15.5px;text-decoration:none;transition:transform .3s var(--ease),box-shadow .3s,background .3s}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:14px;font-weight:700;font-size:15.5px;text-decoration:none;transition:transform .3s var(--ease),box-shadow .3s,background .3s,translate .3s ease-out}
 .btn .ic{width:18px;height:18px}
 .btn-gold{background:linear-gradient(135deg,#E2C383,var(--gold) 50%,#B48C42);color:var(--em-950);box-shadow:0 10px 30px -10px rgba(201,164,92,.7)}
 .btn-gold:hover{transform:translateY(-2px);color:var(--em-950);box-shadow:0 16px 36px -10px rgba(201,164,92,.8)}
@@ -115,8 +118,64 @@ a:focus-visible,summary:focus-visible,.btn:focus-visible{outline:3px solid var(-
 .spin.rev{animation-duration:120s;animation-direction:reverse}
 .floaty{animation:float 6s ease-in-out infinite}
 .crescent{filter:drop-shadow(0 0 10px rgba(230,207,158,.7));animation:glow 4s ease-in-out infinite}
-.hero-edge{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:90px}
-.hero-edge path{fill:var(--bg)}
+/* animated waves */
+.waves{position:absolute;left:0;right:0;bottom:-1px;height:90px;overflow:hidden;z-index:1;pointer-events:none}
+.waves svg{position:absolute;bottom:0;left:0;width:200%;height:100%}
+.waves path{fill:var(--bg)}
+.waves .w1{animation:wave 28s linear infinite}
+.waves .w2{height:120%;opacity:.4;animation:wave 40s linear infinite reverse}
+
+/* aurora + rising lanterns */
+.aurora{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);mix-blend-mode:screen;will-change:transform}
+.aurora i:nth-child(1){width:520px;height:520px;left:-140px;top:-180px;background:#2A7F76;opacity:.55;animation:aur1 22s ease-in-out infinite alternate}
+.aurora i:nth-child(2){width:420px;height:420px;right:-100px;top:8%;background:#C9A45C;opacity:.24;animation:aur2 26s ease-in-out infinite alternate}
+.aurora i:nth-child(3){width:480px;height:480px;left:30%;bottom:-240px;background:#1E6B6B;opacity:.5;animation:aur3 30s ease-in-out infinite alternate}
+.lanterns{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.lanterns i{position:absolute;bottom:-20px;left:var(--x);width:6px;height:6px;border-radius:50%;background:radial-gradient(circle,#FFF4D6,#E6CF9E 45%,rgba(201,164,92,0) 72%);box-shadow:0 0 14px 3px rgba(230,207,158,.4);opacity:0;animation:ascend var(--t) linear var(--d) infinite}
+
+/* hero pointer parallax (set by JS on fine pointers) */
+.art{translate:calc(var(--mx,0)*-16px) calc(var(--my,0)*-12px);transition:translate .8s var(--ease)}
+.pattern{translate:calc(var(--mx,0)*12px) calc(var(--my,0)*10px);transition:translate 1s var(--ease)}
+.stars{position:absolute;inset:0;translate:calc(var(--mx,0)*24px) calc(var(--my,0)*18px);transition:translate 1.2s var(--ease)}
+
+/* hero drifts away as you scroll, where the browser supports scroll-driven animation */
+@supports (animation-timeline: scroll()){
+  .art svg{animation:art-out linear both;animation-timeline:scroll(root);animation-range:0 700px}
+  .hero-copy{animation:copy-out linear both;animation-timeline:scroll(root);animation-range:0 700px}
+}
+
+/* topbar on scroll */
+.topbar{transition:background .3s,box-shadow .3s}
+.topbar.scrolled{background:rgba(7,31,29,.95);box-shadow:0 10px 30px -12px rgba(0,0,0,.45)}
+
+/* cursor spotlight */
+.spot{isolation:isolate}
+.spot::before{content:"";position:absolute;inset:0;border-radius:inherit;z-index:-1;pointer-events:none;opacity:0;transition:opacity .35s;
+  background:radial-gradient(320px circle at var(--x,50%) var(--y,50%),color-mix(in srgb,var(--gold) 16%,transparent),transparent 65%)}
+.spot:hover::before{opacity:1}
+.tilt{transform-style:preserve-3d;will-change:transform}
+
+/* heading underline draws in */
+.policy h2{position:relative}
+.policy h2::after{content:"";position:absolute;left:0;bottom:-8px;height:2px;width:64px;border-radius:2px;background:linear-gradient(90deg,var(--gold),transparent);transform-origin:left}
+html.js .reveal:not(.in) h2::after{transform:scaleX(0)}
+html.js .reveal h2::after{transition:transform 1s var(--ease) .35s}
+html.js .reveal.in.done:hover .medal svg,html:not(.js) .policy:hover .medal svg{transform:rotate(45deg)}
+.medal svg{transition:transform .8s var(--ease)}
+
+/* children appear one after another */
+html.js .reveal:not(.in) .stagger>*{opacity:0;transform:translateY(18px) scale(.98)}
+html.js .reveal:not(.done) .stagger>*{transition:opacity .6s var(--ease),transform .6s var(--ease);transition-delay:calc(.2s + var(--i,0)*.08s)}
+
+/* back to top with reading ring */
+.totop{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom));z-index:35;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;text-decoration:none;color:var(--accent);
+  background:conic-gradient(var(--gold) calc(var(--p,0)*360deg),color-mix(in srgb,var(--gold) 22%,transparent) 0);box-shadow:var(--shadow-lg);
+  opacity:0;transform:translateY(16px) scale(.85);pointer-events:none;transition:opacity .35s,transform .35s var(--ease)}
+.totop::before{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--surface)}
+.totop .ic{position:relative;width:20px;height:20px}
+.totop.show{opacity:1;transform:none;pointer-events:auto}
+.totop:hover .ic{animation:bob .8s ease-in-out infinite}
 
 /* promises */
 .promises{position:relative;z-index:2;margin-top:-110px;display:grid;gap:14px;grid-template-columns:1fr}
@@ -251,7 +310,7 @@ main{min-width:0}
 .contact-inner::before{content:"";position:absolute;inset:0;opacity:.6;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23C9A45C' stroke-opacity='.12' stroke-width='1'%3E%3Crect x='22' y='22' width='36' height='36'/%3E%3Crect x='22' y='22' width='36' height='36' transform='rotate(45 40 40)'/%3E%3Cpath d='M40 0V14.5M40 65.5V80M0 40H14.5M65.5 40H80'/%3E%3C/g%3E%3C/svg%3E")}
 .contact-inner>*{position:relative}
 .contact-inner p{color:rgba(255,255,255,.8) !important;max-width:520px;margin:0 auto 20px !important}
-.contact-inner .mailbig{display:inline-flex;align-items:center;gap:12px;padding:15px 24px;border-radius:16px;background:linear-gradient(135deg,#E2C383,var(--gold) 50%,#B48C42);color:var(--em-950);font-weight:800;font-size:clamp(15px,3.6vw,18px);text-decoration:none;white-space:nowrap;max-width:100%;box-shadow:0 14px 34px -12px rgba(201,164,92,.8);transition:transform .3s var(--ease)}
+.contact-inner .mailbig{display:inline-flex;align-items:center;gap:12px;padding:15px 24px;border-radius:16px;background:linear-gradient(135deg,#E2C383,var(--gold) 50%,#B48C42);color:var(--em-950);font-weight:800;font-size:clamp(15px,3.6vw,18px);text-decoration:none;white-space:nowrap;max-width:100%;box-shadow:0 14px 34px -12px rgba(201,164,92,.8);transition:transform .3s var(--ease),translate .3s ease-out}
 .contact-inner .mailbig:hover{transform:translateY(-3px) scale(1.02);color:var(--em-950)}
 .backtop{display:inline-flex;align-items:center;gap:6px;margin-top:18px;font-size:14px;font-weight:600;text-decoration:none}
 
@@ -282,7 +341,16 @@ html.js .promises .reveal:nth-child(4){transition-delay:.24s}
 @keyframes twinkle{0%,100%{opacity:.15;transform:scale(.7)}50%{opacity:1;transform:scale(1.2)}}
 @keyframes float{50%{transform:translateY(-10px)}}
 @keyframes glow{50%{filter:drop-shadow(0 0 18px rgba(230,207,158,.95))}}
-@keyframes shine{to{background-position:-200% 0}}
+@keyframes letter{from{opacity:0;transform:translateY(.55em) rotate(8deg);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+@keyframes goldglow{0%,100%{color:#E2C383;text-shadow:none}50%{color:#F8EBCB;text-shadow:0 0 26px rgba(230,207,158,.6)}}
+@keyframes wave{to{transform:translateX(-50%)}}
+@keyframes aur1{to{transform:translate(200px,130px) scale(1.2)}}
+@keyframes aur2{to{transform:translate(-170px,150px) scale(.85)}}
+@keyframes aur3{to{transform:translate(-130px,-110px) scale(1.15)}}
+@keyframes ascend{0%{opacity:0;transform:translate(0,0) scale(.6)}12%{opacity:.9}50%{transform:translate(var(--s),-450px) scale(1)}88%{opacity:.55}100%{opacity:0;transform:translate(0,-900px) scale(.7)}}
+@keyframes art-out{to{transform:translateY(140px) scale(.9) rotate(-2deg);opacity:.2}}
+@keyframes copy-out{to{transform:translateY(70px);opacity:.3}}
+@keyframes bob{50%{transform:translateY(-3px)}}
 @keyframes rotate{to{--ang:360deg}}
 
 @media (max-width:420px){
@@ -301,10 +369,15 @@ html.js .promises .reveal:nth-child(4){transition-delay:.24s}
   html.js .reveal{opacity:1;transform:none}
   html.js .reveal .medal svg{transform:none}
   html.js .reveal .timeline{--grow:1}
+  html.js .reveal:not(.in) .stagger>*{opacity:1;transform:none}
+  html.js .reveal:not(.in) h2::after{transform:none}
+  .lanterns{display:none}
 }
 @media print{
-  .progress,.topbar,.toc-side,.toc-mobile,.backtop,.skip,.pattern,.stars,.art,.actions,.hero-edge{display:none !important}
-  .hero{background:none;color:#000}.hero .lede,.hero .tagline,.eyebrow{color:#333}.hero h1 .shine{color:#000;background:none}
+  .progress,.topbar,.toc-side,.toc-mobile,.backtop,.skip,.pattern,.stars,.art,.actions,.waves,.aurora,.lanterns,.totop{display:none !important}
+  html.js .reveal:not(.in) .stagger>*{opacity:1;transform:none}
+  .gold .ch{color:#000}
+  .hero{background:none;color:#000}.hero .lede,.hero .tagline,.eyebrow{color:#333}
   .promises{margin-top:0}
   html.js .reveal{opacity:1;transform:none}
   .policy,.promise{box-shadow:none;break-inside:avoid-page}
@@ -355,7 +428,15 @@ html.js .promises .reveal:nth-child(4){transition-delay:.24s}
 </header>
 
 <div class="hero" id="top">
+  <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
   <div class="pattern" aria-hidden="true"></div>
+  <div class="lanterns" aria-hidden="true">
+    <i style="--x:6%;--t:15s;--d:0s;--s:30px"></i><i style="--x:16%;--t:19s;--d:4s;--s:-24px"></i>
+    <i style="--x:27%;--t:13s;--d:7s;--s:18px"></i><i style="--x:38%;--t:21s;--d:2s;--s:-30px"></i>
+    <i style="--x:49%;--t:16s;--d:9s;--s:26px"></i><i style="--x:58%;--t:18s;--d:1s;--s:-20px"></i>
+    <i style="--x:67%;--t:14s;--d:5s;--s:34px"></i><i style="--x:76%;--t:20s;--d:11s;--s:-26px"></i>
+    <i style="--x:86%;--t:17s;--d:3s;--s:22px"></i><i style="--x:94%;--t:22s;--d:8s;--s:-18px"></i>
+  </div>
   <div class="stars" aria-hidden="true">
     <i style="top:14%;left:8%;animation-delay:.2s"></i><i style="top:30%;left:46%;animation-delay:1.4s"></i>
     <i style="top:70%;left:14%;animation-delay:2.1s"></i><i style="top:20%;left:90%;animation-delay:.8s"></i>
@@ -365,7 +446,7 @@ html.js .promises .reveal:nth-child(4){transition-delay:.24s}
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <span class="eyebrow">Aisha Masjid app</span>
-      <h1>Privacy <span class="shine">Policy</span></h1>
+      <h1 aria-label="Privacy Policy"><span class="word" aria-hidden="true"><span class="ch" style="--d:0">P</span><span class="ch" style="--d:1">r</span><span class="ch" style="--d:2">i</span><span class="ch" style="--d:3">v</span><span class="ch" style="--d:4">a</span><span class="ch" style="--d:5">c</span><span class="ch" style="--d:6">y</span></span> <span class="word gold" aria-hidden="true"><span class="ch" style="--d:8">P</span><span class="ch" style="--d:9">o</span><span class="ch" style="--d:10">l</span><span class="ch" style="--d:11">i</span><span class="ch" style="--d:12">c</span><span class="ch" style="--d:13">y</span></span></h1>
       <p class="tagline">How your information is collected, used and protected.</p>
       <p class="lede">Aisha Masjid uses this app to record the donations entrusted to the mosque and to show donors how those funds are used. This page explains what the app holds, why, and the choices available to you.</p>
       <ul class="chips">
@@ -405,15 +486,18 @@ html.js .promises .reveal:nth-child(4){transition-delay:.24s}
       </svg>
     </div>
   </div>
-  <svg class="hero-edge" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true"><path d="M0 90V60C240 60 300 20 480 20S720 60 720 60 840 20 960 20 1200 60 1440 60V90Z"/></svg>
+  <div class="waves" aria-hidden="true">
+    <svg class="w2" viewBox="0 0 2880 90" preserveAspectRatio="none"><path d="M0 90V50C240 50 300 14 480 14S720 50 720 50 840 14 960 14 1200 50 1440 50C1680 50 1740 14 1920 14S2160 50 2160 50 2280 14 2400 14 2640 50 2880 50V90Z"/></svg>
+    <svg class="w1" viewBox="0 0 2880 90" preserveAspectRatio="none"><path d="M0 90V60C240 60 300 20 480 20S720 60 720 60 840 20 960 20 1200 60 1440 60C1680 60 1740 20 1920 20S2160 60 2160 60 2280 20 2400 20 2640 60 2880 60V90Z"/></svg>
+  </div>
 </div>
 
 <div class="wrap">
   <div class="promises">
-    <div class="promise reveal"><div class="badge"><svg class="ic"><use href="#i-office"/></svg></div><h3>Created by the office</h3><p>Accounts are created by the mosque office, not by self sign-up.</p></div>
-    <div class="promise reveal"><div class="badge"><svg class="ic"><use href="#i-ban"/></svg></div><h3>Never sold</h3><p>Your information is never sold, rented or shared for marketing.</p></div>
-    <div class="promise reveal"><div class="badge"><svg class="ic"><use href="#i-pinoff"/></svg></div><h3>No tracking</h3><p>No location tracking, no advertising and no third-party analytics.</p></div>
-    <div class="promise reveal"><div class="badge"><svg class="ic"><use href="#i-trash"/></svg></div><h3>Your choice</h3><p>Request deletion from Profile → Delete Account, or by email.</p></div>
+    <div class="promise reveal tilt spot"><div class="badge"><svg class="ic"><use href="#i-office"/></svg></div><h3>Created by the office</h3><p>Accounts are created by the mosque office, not by self sign-up.</p></div>
+    <div class="promise reveal tilt spot"><div class="badge"><svg class="ic"><use href="#i-ban"/></svg></div><h3>Never sold</h3><p>Your information is never sold, rented or shared for marketing.</p></div>
+    <div class="promise reveal tilt spot"><div class="badge"><svg class="ic"><use href="#i-pinoff"/></svg></div><h3>No tracking</h3><p>No location tracking, no advertising and no third-party analytics.</p></div>
+    <div class="promise reveal tilt spot"><div class="badge"><svg class="ic"><use href="#i-trash"/></svg></div><h3>Your choice</h3><p>Request deletion from Profile → Delete Account, or by email.</p></div>
   </div>
 </div>
 
@@ -459,16 +543,16 @@ html.js .promises .reveal:nth-child(4){transition-delay:.24s}
       </nav>
     </details>
 
-    <section class="policy reveal" id="introduction" aria-labelledby="h1-intro">
+    <section class="policy reveal spot" id="introduction" aria-labelledby="h1-intro">
       <div class="sec-head"><span class="medal" aria-hidden="true"><svg><use href="#oct"/></svg><b>01</b></span><h2 id="h1-intro">Introduction</h2></div>
       <p class="lead">Aisha Masjid uses this app to record the donations entrusted to the mosque and to show donors how those funds are used.</p>
       <p>This policy explains what personal information the app holds, why it is held, and the choices available to you. It applies to everyone who signs in to the Aisha Masjid app, whether as a donor, an accountant or an administrator.</p>
     </section>
 
-    <section class="policy reveal" id="information-we-collect" aria-labelledby="h2-collect">
+    <section class="policy reveal spot" id="information-we-collect" aria-labelledby="h2-collect">
       <div class="sec-head"><span class="medal" aria-hidden="true"><svg><use href="#oct"/></svg><b>02</b></span><h2 id="h2-collect">Information We Collect</h2></div>
       <p>Accounts are created by the mosque office, not by self sign-up. The app holds the following:</p>
-      <div class="tiles">
+      <div class="tiles stagger">
         <div class="tile" id="account-information">
           <span class="ib"><svg class="ic"><use href="#i-user"/></svg></span>
           <div><h3>Account and personal information</h3>
@@ -494,10 +578,10 @@ html.js .promises .reveal:nth-child(4){transition-delay:.24s}
       </div>
     </section>
 
-    <section class="policy reveal" id="how-we-use" aria-labelledby="h3-use">
+    <section class="policy reveal spot" id="how-we-use" aria-labelledby="h3-use">
       <div class="sec-head"><span class="medal" aria-hidden="true"><svg><use href="#oct"/></svg><b>03</b></span><h2 id="h3-use">How We Use Your Information</h2></div>
       <p>Your information is used only to run the mosque's donation records:</p>
-      <ul class="uses">
+      <ul class="uses stagger">
         <li>To identify you when you sign in</li>
         <li>To record and acknowledge your contributions</li>
         <li>To issue receipts</li>
@@ -507,10 +591,10 @@ html.js .promises .reveal:nth-child(4){transition-delay:.24s}
       </ul>
     </section>
 
-    <section class="policy reveal" id="information-sharing" aria-labelledby="h4-share">
+    <section class="policy reveal spot" id="information-sharing" aria-labelledby="h4-share">
       <div class="sec-head"><span class="medal" aria-hidden="true"><svg><use href="#oct"/></svg><b>04</b></span><h2 id="h4-share">Information Sharing</h2></div>
       <p>Your personal details are visible only to:</p>
-      <div class="who">
+      <div class="who stagger">
         <div><span class="ib"><svg class="ic"><use href="#i-user"/></svg></span><b>You</b>your own record</div>
         <div><span class="ib"><svg class="ic"><use href="#i-receipt"/></svg></span><b>Your accountant</b>the one assigned to you</div>
         <div><span class="ib"><svg class="ic"><use href="#i-office"/></svg></span><b>Administrator</b>of the mosque</div>
@@ -520,17 +604,17 @@ html.js .promises .reveal:nth-child(4){transition-delay:.24s}
       <p class="note"><svg class="ic"><use href="#i-shield"/></svg>Your information is never sold, rented or shared for marketing.</p>
     </section>
 
-    <section class="policy reveal" id="third-party-services" aria-labelledby="h5-third">
+    <section class="policy reveal spot" id="third-party-services" aria-labelledby="h5-third">
       <div class="sec-head"><span class="medal" aria-hidden="true"><svg><use href="#oct"/></svg><b>05</b></span><h2 id="h5-third">Third-Party Services</h2></div>
       <p>The app stores data with these service providers:</p>
-      <div class="providers">
+      <div class="providers stagger">
         <div class="provider"><span class="mono">G</span><div><h3>Google Firebase</h3><p>Authentication, database and notifications · <a href="https://firebase.google.com/support/privacy" rel="noopener">Privacy information</a></p></div></div>
         <div class="provider cf"><span class="mono">C</span><div><h3>Cloudflare</h3><p>File and image storage · <a href="https://www.cloudflare.com/privacypolicy/" rel="noopener">Privacy policy</a></p></div></div>
       </div>
       <p>These providers process the data on the mosque's behalf under their own security obligations and may store it on servers outside your country. No other third party receives your data, except where the mosque is required to disclose it by law.</p>
     </section>
 
-    <section class="policy reveal" id="storage-security" aria-labelledby="h6-sec">
+    <section class="policy reveal spot" id="storage-security" aria-labelledby="h6-sec">
       <div class="sec-head"><span class="medal" aria-hidden="true"><svg><use href="#oct"/></svg><b>06</b></span><h2 id="h6-sec">Data Storage and Security</h2></div>
       <div class="feature"><span class="ib"><svg class="ic"><use href="#i-lock"/></svg></span><p>Access is protected by an email and password you alone know.</p></div>
       <div class="feature"><span class="ib"><svg class="ic"><use href="#i-transit"/></svg></span><p>Data is encrypted in transit.</p></div>
@@ -538,41 +622,41 @@ html.js .promises .reveal:nth-child(4){transition-delay:.24s}
       <p>Please keep your password private and tell the mosque office at once if you think someone else has used your account.</p>
     </section>
 
-    <section class="policy reveal" id="data-retention" aria-labelledby="h7-ret">
+    <section class="policy reveal spot" id="data-retention" aria-labelledby="h7-ret">
       <div class="sec-head"><span class="medal" aria-hidden="true"><svg><use href="#oct"/></svg><b>07</b></span><h2 id="h7-ret">Data Retention</h2></div>
-      <ol class="timeline">
+      <ol class="timeline stagger">
         <li><span class="when">While your account is open</span><p><strong>Profile details</strong> are kept for as long as your account is open.</p></li>
         <li><span class="when">At least seven years</span><p><strong>Donation and receipt records</strong> are kept for at least seven years after they are recorded, because the mosque must be able to account for every amount it has received. These records are retained in an anonymised form even after an account is closed.</p></li>
       </ol>
     </section>
 
-    <section class="policy reveal" id="account-deletion" aria-labelledby="h8-del">
+    <section class="policy reveal spot" id="account-deletion" aria-labelledby="h8-del">
       <div class="sec-head"><span class="medal" aria-hidden="true"><svg><use href="#oct"/></svg><b>08</b></span><h2 id="h8-del">Account and Data Deletion</h2></div>
       <p>You can ask for your account and personal data to be deleted in either of two ways:</p>
-      <ol class="steps">
+      <ol class="steps stagger">
         <li><span><strong>In the app:</strong> open <strong>Profile → Delete Account → Request Account Deletion</strong>. You are asked to type the email address you are signed in with to confirm, and the request is sent to the mosque office.</span></li>
         <li><span><strong>By email:</strong> write to <a href="mailto:aishamasjid.ot@gmail.com">aishamasjid.ot@gmail.com</a> from the email address on your account.</span></li>
       </ol>
-      <div class="kept">
+      <div class="kept stagger">
         <div class="rm"><h3><svg class="ic"><use href="#i-trash"/></svg>What will be removed</h3>
           <ul><li>Your sign-in and password</li><li>Your name, email, phone, CNIC and address</li><li>Your profile photo and notification settings</li></ul></div>
         <div class="kp"><h3><svg class="ic"><use href="#i-archive"/></svg>What will be kept</h3>
           <p>Receipts and accounting entries for donations already recorded are kept, without your personal details attached, for at least seven years from the date each amount was recorded. These anonymised records cannot be traced back to you.</p></div>
       </div>
-      <div class="stat"><span class="num">5</span><p><strong>working days.</strong> Your request is recorded and sent to the mosque office for verification. Your account and personal data are permanently deleted within 5 working days, and you receive a confirmation at your registered email address once this is complete.</p></div>
+      <div class="stat"><span class="num" data-count="5">5</span><p><strong>working days.</strong> Your request is recorded and sent to the mosque office for verification. Your account and personal data are permanently deleted within 5 working days, and you receive a confirmation at your registered email address once this is complete.</p></div>
       <p>You are signed out as soon as the request is made. If you change your mind, contact the mosque office before the deletion is carried out.</p>
       <p>Any monthly commitment recorded in your name will be cancelled, and you will stop receiving announcements and receipts. If you wish to give again afterwards, the mosque office will need to register you as a new donor.</p>
     </section>
 
-    <section class="policy reveal" id="children" aria-labelledby="h9-child">
+    <section class="policy reveal spot" id="children" aria-labelledby="h9-child">
       <div class="sec-head"><span class="medal" aria-hidden="true"><svg><use href="#oct"/></svg><b>09</b></span><h2 id="h9-child">Children's Privacy</h2></div>
       <p>The app is intended for adults who contribute to the mosque. Accounts are not knowingly created for children under 13, and any such account found will be removed.</p>
     </section>
 
-    <section class="policy reveal" id="your-rights" aria-labelledby="h10-rights">
+    <section class="policy reveal spot" id="your-rights" aria-labelledby="h10-rights">
       <div class="sec-head"><span class="medal" aria-hidden="true"><svg><use href="#oct"/></svg><b>10</b></span><h2 id="h10-rights">Your Rights</h2></div>
       <p>You may ask:</p>
-      <div class="rights">
+      <div class="rights stagger">
         <div><span class="ib"><svg class="ic"><use href="#i-eye"/></svg></span><h3>See</h3><p>To see the information held about you.</p></div>
         <div><span class="ib"><svg class="ic"><use href="#i-edit"/></svg></span><h3>Correct</h3><p>To have an inaccurate detail corrected.</p></div>
         <div><span class="ib"><svg class="ic"><use href="#i-trash"/></svg></span><h3>Delete</h3><p>To have your account closed and your personal data deleted.</p></div>
@@ -580,12 +664,12 @@ html.js .promises .reveal:nth-child(4){transition-delay:.24s}
       <p>The Delete Account screen in the app starts a deletion request (see <a href="#account-deletion">Account and Data Deletion</a>), or you may contact the mosque office directly.</p>
     </section>
 
-    <section class="policy reveal" id="policy-updates" aria-labelledby="h11-upd">
+    <section class="policy reveal spot" id="policy-updates" aria-labelledby="h11-upd">
       <div class="sec-head"><span class="medal" aria-hidden="true"><svg><use href="#oct"/></svg><b>11</b></span><h2 id="h11-upd">Policy Updates</h2></div>
       <p>If this policy changes, the revised version will appear on this page and on the Privacy Policy screen in the app, with a new “Last updated” date. Continuing to use the app after a change means you accept the revised policy.</p>
     </section>
 
-    <section class="policy reveal" id="contact" aria-labelledby="h12-contact">
+    <section class="policy reveal spot" id="contact" aria-labelledby="h12-contact">
       <div class="sec-head"><span class="medal" aria-hidden="true"><svg><use href="#oct"/></svg><b>12</b></span><h2 id="h12-contact">Contact Information</h2></div>
       <div class="contact-card">
         <div class="contact-inner">
@@ -614,21 +698,67 @@ html.js .promises .reveal:nth-child(4){transition-delay:.24s}
   </div>
 </footer>
 
+<a class="totop" href="#top" aria-label="Back to top"><svg class="ic"><use href="#i-up"/></svg></a>
+
 <script>
 (function(){
   var d=document.documentElement;
   try{
-    var bar=document.querySelector('.progress span'),ticking=false;
-    function prog(){var h=d.scrollHeight-innerHeight;bar.style.transform='scaleX('+(h>0?Math.min(1,scrollY/h):0)+')';ticking=false}
+    var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,
+        fine=matchMedia('(hover: hover) and (pointer: fine)').matches,
+        bar=document.querySelector('.progress span'),top=document.querySelector('.totop'),
+        head=document.querySelector('.topbar'),ticking=false;
+    function prog(){
+      var h=d.scrollHeight-innerHeight,p=h>0?Math.min(1,scrollY/h):0;
+      bar.style.transform='scaleX('+p+')';
+      top.style.setProperty('--p',p);top.classList.toggle('show',scrollY>600);
+      head.classList.toggle('scrolled',scrollY>20);ticking=false;
+    }
     addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(prog)}},{passive:true});prog();
     if(!('IntersectionObserver' in window)){d.classList.remove('js');return}
-    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -6% 0px',threshold:0.06});
+
+    document.querySelectorAll('.stagger').forEach(function(g){[].forEach.call(g.children,function(c,i){c.style.setProperty('--i',i)})});
+
+    function count(n){
+      var to=+n.getAttribute('data-count'),t0=0;n.textContent='0';
+      function step(t){if(!t0)t0=t;var k=Math.min(1,(t-t0)/1300);n.textContent=Math.round(to*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(step)}
+      requestAnimationFrame(step);
+    }
+    function reveal(el){
+      if(el.classList.contains('in'))return;
+      el.classList.add('in');
+      setTimeout(function(){el.classList.add('done')},1900);
+      var n=el.querySelector('[data-count]');if(n&&!reduce)setTimeout(function(){count(n)},350);
+    }
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){reveal(e.target);io.unobserve(e.target)}})},{rootMargin:'0px 0px -6% 0px',threshold:0.06});
     document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
-    if(location.hash){var t=document.getElementById(location.hash.slice(1));if(t){var s=t.closest('.reveal')||t;s.classList.add('in')}}
+    if(location.hash){var t=document.getElementById(location.hash.slice(1));if(t)reveal(t.closest('.reveal')||t)}
+
     var links={};document.querySelectorAll('.toc-side a').forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
     var spy=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){for(var k in links)links[k].classList.toggle('active',k===e.target.id)}})},{rootMargin:'-25% 0px -65% 0px'});
     document.querySelectorAll('section.policy').forEach(function(s){spy.observe(s)});
     document.querySelectorAll('.toc-mobile a').forEach(function(a){a.addEventListener('click',function(){a.closest('details').open=false})});
+
+    if(!fine)return;
+    document.querySelectorAll('.spot').forEach(function(el){
+      el.addEventListener('pointermove',function(ev){var r=el.getBoundingClientRect();el.style.setProperty('--x',(ev.clientX-r.left)+'px');el.style.setProperty('--y',(ev.clientY-r.top)+'px')});
+    });
+    if(reduce)return;
+    document.querySelectorAll('.tilt').forEach(function(el){
+      el.addEventListener('pointermove',function(ev){
+        var r=el.getBoundingClientRect(),x=(ev.clientX-r.left)/r.width-.5,y=(ev.clientY-r.top)/r.height-.5;
+        el.style.transition='transform .15s ease-out';
+        el.style.transform='perspective(800px) rotateX('+(-y*9).toFixed(2)+'deg) rotateY('+(x*11).toFixed(2)+'deg) translateY(-6px)';
+      });
+      el.addEventListener('pointerleave',function(){el.style.transition='transform .7s cubic-bezier(.2,.7,.2,1)';el.style.transform=''});
+    });
+    document.querySelectorAll('.btn,.mailbig').forEach(function(b){
+      b.addEventListener('pointermove',function(ev){var r=b.getBoundingClientRect();b.style.translate=((ev.clientX-r.left-r.width/2)*.22).toFixed(1)+'px '+((ev.clientY-r.top-r.height/2)*.3).toFixed(1)+'px'});
+      b.addEventListener('pointerleave',function(){b.style.translate=''});
+    });
+    var hero=document.querySelector('.hero');
+    hero.addEventListener('pointermove',function(ev){var r=hero.getBoundingClientRect();hero.style.setProperty('--mx',(((ev.clientX-r.left)/r.width-.5)*2).toFixed(3));hero.style.setProperty('--my',(((ev.clientY-r.top)/r.height-.5)*2).toFixed(3))});
+    hero.addEventListener('pointerleave',function(){hero.style.setProperty('--mx',0);hero.style.setProperty('--my',0)});
   }catch(err){d.classList.remove('js')}
 })();
 </script>
